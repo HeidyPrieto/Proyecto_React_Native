@@ -1,6 +1,7 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 import { MyColors } from '../theme/AppTheme';
+
 interface Props {
     text: string;
     onPress: () => void,
