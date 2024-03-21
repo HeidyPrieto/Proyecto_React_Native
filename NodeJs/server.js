@@ -26,7 +26,7 @@ users(app);
 
 //My IP 192.168.1.12
 //direccion ip V4 de la maquina, consultar con ipconfig 
-server.listen(3000, '10.175.83.164' || 'localhost', function () {
+server.listen(3000, '10.175.80.246' || 'localhost', function () {
     console.log('Aplicación de NodeJS ' + process.pid + ' inicio en el puerto ' + port);
 });
 

@@ -1,22 +1,22 @@
-const mysql = require('../config/config');
-const User = {};
-User.create = (user, result) => {
-    const sql = `
- INSERT INTO users(
- email,
- name,
- lastname,
- phone,
- image,
- password,
- created_at,
- updated_at
- )
- VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
-        ;
+const db = require('../config/config');
 
-    db.query(
-        sql,
+
+const User = {};
+User.create = async (user, result) => {
+    const sql =
+        `INSERT INTO users (
+            email,
+            name,
+            lastname,
+            phone,
+            image,
+            password,
+            create_at,
+            update_at
+            )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+
+    db.query(sql,
         [
             user.email,
             user.name,
@@ -26,17 +26,19 @@ User.create = (user, result) => {
             user.password,
             new Date(),
             new Date()
-        ],
-        (err, res) => {
+        ], (err, res) => {
             if (err) {
-                console.log('error: ', err);
+                console.log('Error al crear el usuario: ', err);
                 result(err, null);
             }
             else {
-                console.log('Id del nuevo Usuario: ', res.insertId);
-                result(null, res.insertId);
+                console.log('Usuario creado: ', {
+                    id: res.insertId, ...user
+                });
+                result(null, { id: res.insertId, ...user });
             }
         }
-    )
-};
-module.exports = User; 
+    );
+}
+
+module.exports = User;
